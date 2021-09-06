@@ -28,28 +28,26 @@ class RegisterPage extends StatelessWidget {
             child: Container(
               color: Colors.transparent,
               width: double.infinity,
-              padding: const EdgeInsets.all(15.0),
               child: Form(
                 key: controller.formKey,
                 child: ListView(
+                  padding: const EdgeInsets.all(15.0),
                   children: [
                     CustomInputField(
                       label: "Name",
                       onChanged: controller.onLastNameChanged,
                       validator: (text) {
-                        if (text == null) return "invalid name";
-                        return isValidName(text) ? null : "invalid name";
+                        return isValidName(text!) ? null : "invalid name";
                       },
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    const SizedBox(height: 15),
                     CustomInputField(
                         label: "Last Name",
                         onChanged: controller.onLastNameChanged,
                         validator: (text) {
-                          if (text == null) return "invalid last name";
-                          return isValidName(text) ? null : "invalid last name";
+                          return isValidName(text!)
+                              ? null
+                              : "invalid last name";
                         }),
                     const SizedBox(height: 15),
                     CustomInputField(
@@ -57,8 +55,7 @@ class RegisterPage extends StatelessWidget {
                         inputype: TextInputType.emailAddress,
                         onChanged: controller.onEmailChanged,
                         validator: (text) {
-                          if (text == null) return "invalid email";
-                          return isValidEmail(text) ? null : "invalid email";
+                          return isValidEmail(text!) ? null : "invalid email";
                         }),
                     const SizedBox(height: 15),
                     CustomInputField(
@@ -67,8 +64,7 @@ class RegisterPage extends StatelessWidget {
                       isPassword: true,
                       inputype: TextInputType.visiblePassword,
                       validator: (text) {
-                        if (text == null) return "Invalid password";
-                        if (text.trim().length >= 6) {
+                        if (text!.trim().length >= 6) {
                           return null;
                         }
                         return "Invalid password";
@@ -82,11 +78,10 @@ class RegisterPage extends StatelessWidget {
                         isPassword: true,
                         onChanged: controller.onVPasswordChanged,
                         validator: (text) {
-                          if (text == null) return "Invalid password";
                           if (controller.state.password != text) {
                             return "password don't match";
                           }
-                          if (text.trim().length >= 6) {
+                          if (text!.trim().length >= 6) {
                             return null;
                           }
                           return "Invalid password";
