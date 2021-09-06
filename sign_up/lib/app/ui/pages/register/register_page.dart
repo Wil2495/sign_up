@@ -6,6 +6,7 @@ import 'package:sign_up/app/utils/email_validator.dart';
 import 'package:sign_up/app/utils/name_validator.dart';
 import 'controller/register_controller.dart';
 import 'controller/register_state.dart';
+import 'utils/send_register_form.dart';
 
 final registerProvider = StateProvider<RegisterController, RegisterState>(
   (_) => RegisterController(),
@@ -28,70 +29,78 @@ class RegisterPage extends StatelessWidget {
               color: Colors.transparent,
               width: double.infinity,
               padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  CustomInputField(
-                    label: "Name",
-                    onChanged: controller.onLastNameChanged,
-                    validator: (text) {
-                      if (text == null) return null;
-                      return isValidName(text) ? null : "invalid name";
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  CustomInputField(
-                      label: "Last Name",
+              child: Form(
+                key: controller.formKey,
+                child: ListView(
+                  children: [
+                    CustomInputField(
+                      label: "Name",
                       onChanged: controller.onLastNameChanged,
                       validator: (text) {
                         if (text == null) return null;
-                        return isValidName(text) ? null : "invalid last name";
-                      }),
-                  const SizedBox(height: 15),
-                  CustomInputField(
-                      label: "Email",
-                      inputype: TextInputType.emailAddress,
-                      onChanged: controller.onEmailChanged,
-                      validator: (text) {
-                        if (text == null) return null;
-                        return isValidEmail(text) ? null : "invalid email";
-                      }),
-                  const SizedBox(height: 15),
-                  CustomInputField(
-                    label: "Password",
-                    onChanged: controller.onPasswordChanged,
-                    isPassword: true,
-                    inputype: TextInputType.visiblePassword,
-                    validator: (text) {
-                      if (text == null) return null;
-                      if (text.trim().length >= 6) {
-                        return null;
-                      }
-                      return "Invalid password";
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  Consumer(builder: (_, watch, __) {
-                    watch(registerProvider.select((state) => state.password));
-
-                    return CustomInputField(
-                      label: "Verification Password",
+                        return isValidName(text) ? null : "invalid name";
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomInputField(
+                        label: "Last Name",
+                        onChanged: controller.onLastNameChanged,
+                        validator: (text) {
+                          if (text == null) return null;
+                          return isValidName(text) ? null : "invalid last name";
+                        }),
+                    const SizedBox(height: 15),
+                    CustomInputField(
+                        label: "Email",
+                        inputype: TextInputType.emailAddress,
+                        onChanged: controller.onEmailChanged,
+                        validator: (text) {
+                          if (text == null) return null;
+                          return isValidEmail(text) ? null : "invalid email";
+                        }),
+                    const SizedBox(height: 15),
+                    CustomInputField(
+                      label: "Password",
+                      onChanged: controller.onPasswordChanged,
                       isPassword: true,
-                      onChanged: controller.onVPasswordChanged,
+                      inputype: TextInputType.visiblePassword,
                       validator: (text) {
                         if (text == null) return null;
-                        if (controller.state.password != text) {
-                          return "password don't match";
-                        }
                         if (text.trim().length >= 6) {
                           return null;
                         }
                         return "Invalid password";
                       },
-                    );
-                  })
-                ],
+                    ),
+                    const SizedBox(height: 15),
+                    Consumer(builder: (_, watch, __) {
+                      watch(registerProvider.select((state) => state.password));
+                      return CustomInputField(
+                        label: "Verification Password",
+                        isPassword: true,
+                        onChanged: controller.onVPasswordChanged,
+                        validator: (text) {
+                          if (text == null) return null;
+                          if (controller.state.password != text) {
+                            return "password don't match";
+                          }
+                          if (text.trim().length >= 6) {
+                            return null;
+                          }
+                          return "Invalid password";
+                        },
+                      );
+                    }),
+                    const SizedBox(height: 30.0),
+                    MaterialButton(
+                      child: const Text("Register"),
+                      color: Colors.blue,
+                      onPressed: () => sendRegisterForm(context),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

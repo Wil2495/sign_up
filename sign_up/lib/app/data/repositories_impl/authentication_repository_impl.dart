@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_up/app/domain/repositories/authentication_repository.dart';
 
@@ -27,5 +26,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         _user = user;
       },
     );
+  }
+
+  @override
+  Future<void> signOut() {
+    return _auth.signOut();
   }
 }
