@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.co.empresa.sign_up">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="sign_up"
         android:icon="@mipmap/ic_launcher">

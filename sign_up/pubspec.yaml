@@ -12,10 +12,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: "^1.5.0"
 
 
 
   cupertino_icons: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:

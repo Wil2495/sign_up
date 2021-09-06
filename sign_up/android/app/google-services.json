@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1010871530098",
+    "project_id": "sign-up-abb73",
+    "storage_bucket": "sign-up-abb73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010871530098:android:6a7362aacb6fe22000c8eb",
+        "android_client_info": {
+          "package_name": "com.co.empresa.sign_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010871530098-i4ahqgvi1fgnso23qsjkvoh6mfcckabr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.co.empresa.sign_up",
+            "certificate_hash": "aff3f71c75308dc31846ac6395a4aa0c4fe66991"
+          }
+        },
+        {
+          "client_id": "1010871530098-dcuf8o6bd6sac0bsgg98sc7vv2hnk45m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzlqRXtnPRnPdL0Eqh_r3SfwxedYfdPCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010871530098-dcuf8o6bd6sac0bsgg98sc7vv2hnk45m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1010871530098-u1un8lvoi8tj9163uj40kbg2i3std16q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.co.empresa.signUp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
