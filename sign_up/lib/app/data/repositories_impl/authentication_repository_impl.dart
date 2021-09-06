@@ -9,7 +9,6 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final Completer<void> _completer = Completer();
 
   AuthenticationRepositoryImpl(this._auth) {
-    print("🚒");
     _init();
   }
   @override

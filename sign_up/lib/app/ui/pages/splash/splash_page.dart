@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:sign_up/app/ui/pages/splash/splash_controller.dart';
+import 'package:flutter_meedu/router.dart' as router;
 
-class SplashPage extends StatefulWidget {
+final splashProvider =
+    SimpleProvider((_) => SplashController(), autoDispose: true);
+
+class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  final _controller = SplashController();
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
+    return ProviderListener<SplashController>(
+      provider: splashProvider,
+      onChange: (_, controller) {
+        final routeName = controller.routeName;
+        if (routeName != null) {
+          router.pushReplacementNamed(routeName);
+        }
+      },
+      builder: (_, __) {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }
