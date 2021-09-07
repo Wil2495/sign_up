@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/flutter_meedu.dart';
-import 'package:sign_up/app/ui/pages/splash/splash_controller.dart';
+import 'package:sign_up/app/ui/pages/splash/controller/splash_controller.dart';
 import 'package:flutter_meedu/router.dart' as router;
 
 final splashProvider =
