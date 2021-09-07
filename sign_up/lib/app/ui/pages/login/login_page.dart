@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/state.dart';
 import 'package:sign_up/app/ui/global_widgets/custom_input_field.dart';
 import 'package:sign_up/app/ui/pages/login/controller/login_controller.dart';
+import 'package:sign_up/app/ui/pages/login/utils/send_login_form.dart';
 import 'package:sign_up/app/ui/routes/routes.dart';
 import 'package:flutter_meedu/router.dart' as router;
 import 'package:flutter_meedu/meedu.dart';
@@ -57,8 +58,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
-                        onPressed: () =>
-                            controller.formkey.currentState!.validate(),
+                        onPressed: () => sendLoginForm(context),
                         child: const Text("Login"),
                       ),
                       const SizedBox(height: 20.0),

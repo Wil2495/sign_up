@@ -32,4 +32,19 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<void> signOut() {
     return _auth.signOut();
   }
+
+  @override
+  Future<SignInResponse> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = userCredential.user!;
+      return SignInResponse(null, user);
+    } on FirebaseAuthException catch (e) {
+      return SignInResponse(e.code, null);
+    }
+  }
 }
