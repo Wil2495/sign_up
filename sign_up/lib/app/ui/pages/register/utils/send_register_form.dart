@@ -25,6 +25,9 @@ Future<void> sendRegisterForm(BuildContext context) async {
         case SignUpError.networkRequestFailed:
           content = "network Request Failed";
           break;
+        case SignUpError.tooManyRequests:
+          content = "tooManyRequests";
+          break;
         case SignUpError.unknown:
         default:
           content = "error unknown";

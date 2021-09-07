@@ -28,6 +28,9 @@ Future<void> sendLoginForm(BuildContext context) async {
         case SignInError.wrongPassword:
           errorMessage = "wrong Password";
           break;
+        case SignInError.tooManyRequests:
+          errorMessage = "tooManyRequests";
+          break;
         case SignInError.unknown:
         default:
           errorMessage = "unknown";
