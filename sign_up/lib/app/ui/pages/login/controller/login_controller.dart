@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart' show FormState, GlobalKey;
 import 'package:flutter_meedu/meedu.dart';
 import 'package:sign_up/app/domain/repositories/authentication_repository.dart';
+import 'package:sign_up/app/domain/responses/sign_in_response.dart';
 
 class LoginController extends SimpleNotifier {
   String _email = '', _password = "";

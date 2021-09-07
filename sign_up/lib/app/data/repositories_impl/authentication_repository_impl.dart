@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_up/app/domain/repositories/authentication_repository.dart';
+import 'package:sign_up/app/domain/responses/sign_in_response.dart';
 
 class AuthenticationRepositoryImpl implements AuthenticationRepository {
   final FirebaseAuth _auth;
@@ -44,7 +45,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       final user = userCredential.user!;
       return SignInResponse(null, user);
     } on FirebaseAuthException catch (e) {
-      return SignInResponse(e.code, null);
+      return SignInResponse(stringToSignError(e.code), null);
     }
   }
 }

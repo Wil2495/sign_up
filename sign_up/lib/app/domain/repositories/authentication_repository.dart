@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sign_up/app/domain/responses/sign_in_response.dart';
 
 abstract class AuthenticationRepository {
   //si esto retorna un valor null quiere decir que no hay sesión iniciada.
@@ -6,11 +7,4 @@ abstract class AuthenticationRepository {
   Future<void> signOut();
   Future<SignInResponse> signInWithEmailAndPassword(
       String email, String password);
-}
-
-class SignInResponse {
-  final String? error;
-  final User? user;
-
-  SignInResponse(this.error, this.user);
 }

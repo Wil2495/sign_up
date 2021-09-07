@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:sign_up/app/domain/responses/sign_in_response.dart';
 import 'package:sign_up/app/ui/global_widgets/dialogs/dialogs.dart';
 import 'package:sign_up/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:sign_up/app/ui/routes/routes.dart';
@@ -13,7 +14,26 @@ Future<void> sendLoginForm(BuildContext context) async {
     final response = await controller.submit();
     router.pop();
     if (response.error != null) {
-      Dialogs.alert(context, title: "Error", content: response.error);
+      String errorMessage = "";
+      switch (response.error) {
+        case SignInError.networkRequestFailed:
+          errorMessage = "network Request Failed";
+          break;
+        case SignInError.userDisabled:
+          errorMessage = "user Disabled";
+          break;
+        case SignInError.userNotFound:
+          errorMessage = "user Not Found";
+          break;
+        case SignInError.wrongPassword:
+          errorMessage = "wrong Password";
+          break;
+        case SignInError.unknown:
+        default:
+          errorMessage = "unknown";
+          break;
+      }
+      Dialogs.alert(context, title: "Error", content: errorMessage);
     } else {
       router.pushNamedAndRemoveUntil(Routes.home);
     }

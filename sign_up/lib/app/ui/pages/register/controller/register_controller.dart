@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:sign_up/app/domain/helpers/sign_up.dart';
 import 'package:sign_up/app/domain/repositories/sign_up_repository.dart';
+import 'package:sign_up/app/domain/responses/sign_up_response.dart';
 import 'register_state.dart';
 
 class RegisterController extends StateNotifier<RegisterState> {

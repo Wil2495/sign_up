@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sign_up/app/domain/helpers/sign_up.dart';
+import 'package:sign_up/app/domain/responses/sign_up_response.dart';
 import 'package:sign_up/app/ui/global_widgets/dialogs/dialogs.dart';
 import 'package:sign_up/app/ui/global_widgets/dialogs/progress_dialog.dart';
 import 'package:sign_up/app/ui/routes/routes.dart';
@@ -22,6 +22,10 @@ Future<void> sendRegisterForm(BuildContext context) async {
         case SignUpError.weakPassword:
           content = "weak password";
           break;
+        case SignUpError.networkRequestFailed:
+          content = "network Request Failed";
+          break;
+        case SignUpError.unknown:
         default:
           content = "error unknown";
           break;
