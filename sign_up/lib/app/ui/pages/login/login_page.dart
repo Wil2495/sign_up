@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/state.dart';
+import 'package:sign_up/app/ui/global_controllers/session_controller.dart';
 import 'package:sign_up/app/ui/global_widgets/custom_input_field.dart';
 import 'package:sign_up/app/ui/pages/login/controller/login_controller.dart';
 import 'package:sign_up/app/ui/pages/login/utils/send_login_form.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_meedu/meedu.dart';
 import 'package:sign_up/app/utils/email_validator.dart';
 
 final loginProvider = SimpleProvider(
-  (_) => LoginController(),
+  (_) => LoginController(sessionProvider.read),
 );
 
 class LoginPage extends StatelessWidget {
@@ -62,7 +63,7 @@ class LoginPage extends StatelessWidget {
                         children: [
                           TextButton(
                               onPressed: () =>
-                                  router.pushNamed(Routes.reset_password),
+                                  router.pushNamed(Routes.resetPassword),
                               child: const Text("Forgot Password?")),
                           const SizedBox(width: 10.0),
                           ElevatedButton(

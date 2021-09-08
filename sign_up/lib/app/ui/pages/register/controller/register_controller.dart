@@ -3,21 +3,27 @@ import 'package:flutter_meedu/flutter_meedu.dart';
 import 'package:sign_up/app/domain/helpers/sign_up.dart';
 import 'package:sign_up/app/domain/repositories/sign_up_repository.dart';
 import 'package:sign_up/app/domain/responses/sign_up_response.dart';
+import 'package:sign_up/app/ui/global_controllers/session_controller.dart';
 import 'register_state.dart';
 
 class RegisterController extends StateNotifier<RegisterState> {
-  RegisterController() : super(RegisterState.initialState);
+  RegisterController(this._sessionController)
+      : super(RegisterState.initialState);
   final GlobalKey<FormState> formKey = GlobalKey();
   final _signUpRepository = Get.i.find<SignUpRepository>();
-
-  Future<SignUpResponse> submit() {
-    return _signUpRepository.register(
+  final SessionController _sessionController;
+  Future<SignUpResponse> submit() async {
+    final response = await _signUpRepository.register(
       SignUpData(
           name: state.name,
           lastname: state.lastname,
           email: state.email,
           password: state.password),
     );
+    if (response.error == null) {
+      _sessionController.setUser(response.user!);
+    }
+    return response;
   }
 
   void onFirstNameChanged(String text) {

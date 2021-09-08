@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/meedu.dart';
 import 'package:flutter_meedu/state.dart';
+import 'package:sign_up/app/ui/global_controllers/session_controller.dart';
 import 'package:sign_up/app/ui/global_widgets/custom_input_field.dart';
 import 'package:sign_up/app/utils/email_validator.dart';
 import 'package:sign_up/app/utils/name_validator.dart';
@@ -9,7 +10,7 @@ import 'controller/register_state.dart';
 import 'utils/send_register_form.dart';
 
 final registerProvider = StateProvider<RegisterController, RegisterState>(
-  (_) => RegisterController(),
+  (_) => RegisterController(sessionProvider.read),
 );
 
 class RegisterPage extends StatelessWidget {
