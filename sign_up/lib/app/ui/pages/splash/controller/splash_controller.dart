@@ -5,7 +5,7 @@ import 'package:sign_up/app/ui/routes/routes.dart';
 
 class SplashController extends SimpleNotifier {
   final SessionController _sessionController;
-  final _authRepository = Get.i.find<AuthenticationRepository>();
+  final AuthenticationRepository _authRepository = Get.i.find();
 
   String? _routeName;
   String? get routeName => _routeName;
