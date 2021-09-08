@@ -8,11 +8,12 @@ class ProfileTab extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final sessionController = watch(sessionProvider);
     final user = sessionController.user!;
-    String displayName = user.displayName ?? '';
+    final displayName = user.displayName ?? '';
     final letter = displayName.isNotEmpty ? displayName[1] : "";
 
     return ListView(
       children: [
+        const SizedBox(height: 20.0),
         CircleAvatar(
           radius: 75,
           child: user.photoURL == null
@@ -24,9 +25,66 @@ class ProfileTab extends ConsumerWidget {
           backgroundImage:
               user.photoURL != null ? NetworkImage(user.photoURL!) : null,
         ),
-        Text(displayName),
-        Text(user.email ?? ""),
+        const SizedBox(height: 10.0),
+        Center(
+          child: Text(
+            displayName,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Center(child: Text(user.email ?? "")),
+        const SizedBox(height: 20.0),
+        // const Text("User data"),
+        LabelButton(
+          label: "Display Name",
+          value: displayName,
+          onPressed: () {},
+        ),
+        LabelButton(
+          label: "User Email",
+          value: user.email ?? '',
+        ),
+        LabelButton(
+          label: "User Email",
+          value: user.emailVerified ? 'YES' : 'NO',
+        )
       ],
+    );
+  }
+}
+
+class LabelButton extends StatelessWidget {
+  const LabelButton(
+      {Key? key, required this.label, required this.value, this.onPressed})
+      : super(key: key);
+  final String label, value;
+  final VoidCallback? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onPressed,
+      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+      leading: Text(
+        label,
+        style: const TextStyle(fontWeight: FontWeight.w500),
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.w300),
+          ),
+          const SizedBox(width: 5.0),
+          Icon(
+            Icons.chevron_right_rounded,
+            size: 22.0,
+            color: onPressed != null ? Colors.black45 : Colors.transparent,
+          ),
+        ],
+      ),
     );
   }
 }
