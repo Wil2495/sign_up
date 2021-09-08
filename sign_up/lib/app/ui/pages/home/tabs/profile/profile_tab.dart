@@ -3,17 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meedu/state.dart';
 import 'package:sign_up/app/ui/global_controllers/session_controller.dart';
 import 'package:sign_up/app/ui/global_controllers/theme_controller.dart';
+import 'package:sign_up/app/ui/global_widgets/dialogs/dialogs.dart';
+import 'package:sign_up/app/ui/global_widgets/dialogs/progress_dialog.dart';
+import 'package:sign_up/app/ui/global_widgets/dialogs/show_input_dialog.dart';
 import '../../../../utils/dark_mode_extension.dart';
 
 class ProfileTab extends ConsumerWidget {
   const ProfileTab({Key? key}) : super(key: key);
+  void _updateDisplayName(BuildContext context) async {
+    final SessionController = sessionProvider.read;
+    final value = await showInputDialog(
+      context,
+      initialValue: SessionController.user?.displayName ?? "",
+    );
+    if (value != null) {
+      ProgressDialog.show(context);
+      final user = await sessionProvider.read.updateDisplayName(value);
+      Navigator.pop(context);
+      if (user == null) {
+        Dialogs.alert(context,
+            title: "ERROR", content: "Check your internet connection");
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, watch) {
     final sessionController = watch(sessionProvider);
     final isDark = context.isDarkThemeModeExtension;
     final user = sessionController.user!;
     final displayName = user.displayName ?? '';
-    final letter = displayName.isNotEmpty ? displayName[1] : "";
+    final letter = displayName.isNotEmpty ? displayName[0].toUpperCase() : "";
 
     return ListView(
       children: [
@@ -42,10 +62,9 @@ class ProfileTab extends ConsumerWidget {
         const SizedBox(height: 20.0),
         // const Text("User data"),
         LabelButton(
-          label: "Display Name",
-          value: displayName,
-          onPressed: () {},
-        ),
+            label: "Display Name",
+            value: displayName,
+            onPressed: () => _updateDisplayName(context)),
         LabelButton(
           label: "User Email",
           value: user.email ?? '',
