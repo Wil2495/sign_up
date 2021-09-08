@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sign_up/app/ui/pages/home/home_page.dart';
+import '../../../utils/dark_mode_extension.dart';
 
 class HomeTabBar extends StatelessWidget {
   HomeTabBar({Key? key}) : super(key: key);
   final _homeController = homeProvider.read;
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkThemeModeExtension;
     return SafeArea(
       top: false,
       child: TabBar(
-        unselectedLabelColor: Colors.black26,
+        unselectedLabelColor: isDark == true ? Colors.white30 : Colors.black26,
         labelColor: Colors.blue,
         indicator: _CustomIndicator(),
         tabs: const [

@@ -1,12 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meedu/state.dart';
 import 'package:sign_up/app/ui/global_controllers/session_controller.dart';
+import 'package:sign_up/app/ui/global_controllers/theme_controller.dart';
+import '../../../../utils/dark_mode_extension.dart';
 
 class ProfileTab extends ConsumerWidget {
   const ProfileTab({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, watch) {
     final sessionController = watch(sessionProvider);
+    final isDark = context.isDarkThemeModeExtension;
     final user = sessionController.user!;
     final displayName = user.displayName ?? '';
     final letter = displayName.isNotEmpty ? displayName[1] : "";
@@ -49,7 +53,12 @@ class ProfileTab extends ConsumerWidget {
         LabelButton(
           label: "User Email",
           value: user.emailVerified ? 'YES' : 'NO',
-        )
+        ),
+        CupertinoSwitch(
+            value: isDark,
+            onChanged: (_) {
+              themeProvider.read.toggle();
+            })
       ],
     );
   }
@@ -63,6 +72,8 @@ class LabelButton extends StatelessWidget {
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkThemeModeExtension;
+    final iconColor = isDark ? Colors.white30 : Colors.black45;
     return ListTile(
       onTap: onPressed,
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
@@ -81,7 +92,7 @@ class LabelButton extends StatelessWidget {
           Icon(
             Icons.chevron_right_rounded,
             size: 22.0,
-            color: onPressed != null ? Colors.black45 : Colors.transparent,
+            color: onPressed != null ? iconColor : Colors.transparent,
           ),
         ],
       ),
